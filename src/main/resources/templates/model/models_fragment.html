@@ -1,0 +1,32 @@
+<div class="row" th:fragment="3dModelsList" xmlns:th="http://www.thymeleaf.org">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div th:each="model : ${models}" class="col-sm-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${model.carModel.model}">Card title</h5>
+                        <p class="card-text" th:text="${model.details}">This is a wider card with supporting text below
+                            as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text" th:text="${model.price.amount} + ' ' + ${model.price.currency}">8</p>
+                    </div>
+                    <a class="btn btn-sm btn-outline-secondary" href="#"
+                       th:href="@{'/model/' + ${model.id} + '/show'}">Details</a>
+                    <div class="card-footer">
+                        <small class="text-muted" th:text="${model.modifiedAt.toLocalDate}">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" th:fragment="modelSelectionList" xmlns:th="http://www.thymeleaf.org">
+    <div class="form-floating col-md-12">
+            <select class="form-select" id="carModel" name="carModelId" required>
+                <option th:each="model : ${models}"
+                        th:text="${model.model} + ' (' + ${model.internalBodyCode} + ') ' + '(' + ${model.startYear} + '-' + ${model.endYear} + ')'" th:value="${model.id}">
+                </option>
+            </select>
+        <label for="carModel" class="form-label">Model</label>
+    </div>
+</div>
